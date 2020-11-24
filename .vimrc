@@ -1,4 +1,4 @@
-set encoding=utf-8
+set encoding=UTF-8
 scriptencoding utf-8
 "保存時の文字コード"
 set fileencoding=utf-8
@@ -73,6 +73,12 @@ if &term =~ "xterm"
 
     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
+"一気に二つの括弧を入れる"
+"inoremap { {}<LEFT>
+inoremap [ []<LEFT>
+inoremap ( ()<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
 "vundleの初期化"
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -99,6 +105,7 @@ let g:indent_guides_color_change_percent = 30
 let g:indent_guides_guide_size = 1
 "molokai(カラースキーム)"
 Bundle 'tomasr/molokai'
+colorscheme molokai
 "---------------------------------------------------------"
 " molokaiの設定"
 "----------------------------------------------------------"
@@ -108,4 +115,28 @@ set t_Co=256
 syntax enable
 "vim-trailing-whitespace (末尾の全角と半角の空白文字を赤くハイライト)"
 Bundle "bronson/vim-trailing-whitespace"
+"tpope/vim-fugitive（vimからgitを打てるプラグイン）"
 Bundle "tpope/vim-fugitive"
+"nerdtree（ファイルツリーを表示する）"
+Bundle 'preservim/nerdtree'
+"引数なしでvimを開いたらNERDTreeを起動、
+"引数ありならNERDTreeは起動せず、引数で渡されたファイルを開く。
+autocmd vimenter * if !argc() | NERDTree | endif
+
+"他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"ctrl+nでON"
+map <C-n> :NERDTreeToggle<CR>
+"vim-devicons(vimの表示にアイコンを追加する)"
+Bundle 'ryanoasis/vim-devicons'
+ " フォルダアイコンを表示
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
+let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
+" after a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
+"vim-airline(エアラインをいい感じにするやつ)"
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themesi'
