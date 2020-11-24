@@ -73,52 +73,49 @@ if &term =~ "xterm"
 
     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
-"一気に二つの括弧を入れる"
-"inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-"vundleの初期化"
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-"vundleをvundleで管理"
-Bundle 'gmarik/vundle'
+" バックアップファイルやスワップファイルを作成しない
+set nowritebackup
+set nobackup
+set noswapfile
+
+"deinを呼び出し"
+if &compatible
+  set nocompatible
+endif
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+call dein#begin(expand('~/.vim/dein'))
 "ファイル形式検出プラグインインデントをON"
 filetype plugin indent on
 "------以下プラグイン------"
 "vim-indent-guides(インデントのハイライト)"
-Bundle 'nathanaelkane/vim-indent-guides'
+call dein#add ('nathanaelkane/vim-indent-guides')
 " vim立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup=1
 " ガイドをスタートするインデントの量
 let g:indent_guides_start_level=2
-"自動カラーを無効にする
-let g:indent_guides_auto_colors=0
-" 奇数インデントのカラー
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=gray
-" 偶数インデントのカラー
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3c3c3c ctermbg=darkgray
 " ハイライト色の変化の幅
 let g:indent_guides_color_change_percent = 30
 " ガイドの幅
 let g:indent_guides_guide_size = 1
 "molokai(カラースキーム)"
-Bundle 'tomasr/molokai'
-colorscheme molokai
+call dein#add ('tomasr/molokai')
+call dein#add ('cocopon/iceberg.vim')
+call dein#add ("w0ng/vim-hybrid")
+colorscheme hybrid
 "---------------------------------------------------------"
-" molokaiの設定"
+" hybridの設定"
 "----------------------------------------------------------"
 "色をつける"
 set t_Co=256
+set background=dark
 "構文に色をつける"
 syntax enable
 "vim-trailing-whitespace (末尾の全角と半角の空白文字を赤くハイライト)"
-Bundle "bronson/vim-trailing-whitespace"
+call dein#add ("bronson/vim-trailing-whitespace")
 "tpope/vim-fugitive（vimからgitを打てるプラグイン）"
-Bundle "tpope/vim-fugitive"
+call dein#add ("tpope/vim-fugitive")
 "nerdtree（ファイルツリーを表示する）"
-Bundle 'preservim/nerdtree'
+call dein#add ('preservim/nerdtree')
 "引数なしでvimを開いたらNERDTreeを起動、
 "引数ありならNERDTreeは起動せず、引数で渡されたファイルを開く。
 autocmd vimenter * if !argc() | NERDTree | endif
@@ -129,14 +126,16 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "ctrl+nでON"
 map <C-n> :NERDTreeToggle<CR>
 "vim-devicons(vimの表示にアイコンを追加する)"
-Bundle 'ryanoasis/vim-devicons'
+call dein#add ('ryanoasis/vim-devicons')
  " フォルダアイコンを表示
 let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
 let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
-" after a re-source, fix syntax matching issues (concealing brackets):
+  "after a re-source, fix syntax matching issues (concealing brackets):
 if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
 "vim-airline(エアラインをいい感じにするやつ)"
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themesi'
+call dein#add ('vim-airline/vim-airline')
+call dein#add ('vim-airline/vim-airline-themes')
+"括弧をいい感じにしてくれる奴"
+call dein#add ('cohama/lexima.vim')
