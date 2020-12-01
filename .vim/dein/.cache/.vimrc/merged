@@ -1,0 +1,3 @@
+{'repo': v:val.repo, 'rev': get(v:val, 'rev', '')}
+0
+[{'rev': '', 'repo': 'bronson/vim-trailing-whitespace'}, {'rev': '', 'repo': 'cocopon/iceberg.vim'}, {'rev': '', 'repo': 'cohama/lexima.vim'}, {'rev': '', 'repo': 'nathanaelkane/vim-indent-guides'}, {'rev': '', 'repo': 'preservim/nerdtree'}, {'rev': '', 'repo': 'ryanoasis/vim-devicons'}, {'rev': '', 'repo': 'tomasr/molokai'}, {'rev': '', 'repo': 'tpope/vim-fugitive'}, {'rev': '', 'repo': 'vim-airline/vim-airline'}, {'rev': '', 'repo': 'vim-airline/vim-airline-themes'}, {'rev': '', 'repo': 'w0ng/vim-hybrid'}]
